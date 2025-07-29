@@ -2,9 +2,10 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from "pinia";
-import uView from "uview-plus";
 import axios from "@/utils/http";
 import { loginByToken } from "@/composables/useAuth";
+import uviewPlus, { setConfig } from 'uview-plus'
+
 
 // 创建 Vue 应用实例
 const app = createApp(App);
@@ -12,7 +13,7 @@ const pinia = createPinia();
 
 // 注册 Pinia 和 uView 插件
 app.use(pinia);
-app.use(uView);
+app.use(uviewPlus);
 
 // 创建一个启动 Promise，供全局监听启动流程
 const launched = new Promise<void>(async (resolve, reject) => {

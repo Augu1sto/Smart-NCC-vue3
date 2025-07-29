@@ -7,7 +7,10 @@
       "@/*": ["./src/*"]
     },
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types"],
+    "types": [
+      "@dcloudio/types",
+      "uview-plus/types"
+  ],
 
     // 替代已废弃选项
     "verbatimModuleSyntax": true,

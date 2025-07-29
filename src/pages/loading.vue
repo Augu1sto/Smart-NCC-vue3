@@ -1,7 +1,7 @@
 <template>
 	<!-- 页面加载等待提示，可替换为你项目的样式 -->
 	<view>
-	  <u-loading-page />
+	  <up-loading-page></up-loading-page>
 	</view>
   </template>
   
