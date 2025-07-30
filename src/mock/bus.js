@@ -123,4 +123,4 @@ function getData(idx1, idx2, idx3) {
 	return timetable[idx1][idx2][idx3];
 }
 
-module.exports = {getData}
+export default {getData};

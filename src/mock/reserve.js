@@ -1,11 +1,11 @@
 /** 
  * @module 教室预约信息
 **/
-const Mock = require('better-mock')
+import Mock from 'better-mock';
 const Random = Mock.Random
 
-const time = require('@/utils/mytime.js');
-const { DataAll } = require('@icon-park/vue');
+import myTime from '@/utils/mytime';
+// const { DataAll } = require('@icon-park/vue');
 
 /**
  * 初始化所有数据，变更不在这里做
@@ -13,7 +13,7 @@ const { DataAll } = require('@icon-park/vue');
 const allData = Mock.mock({"data|7":[
 	{
 		"id|+1": 0,
-		"date": function(){return time.calcDate(this.id+1)},
+		"date": function(){return myTime.calcDate(this.id+1)},
 		"detail": [{
 			"name": "新珈楼",
 			"area|3": [{
@@ -158,4 +158,4 @@ function cancelRsv(data) {
 // TODO
 // 限制用户一天只能预约两个时段
 
-module.exports = {rsvDataAll,makeRsv,myRsv}
+export default {rsvDataAll,makeRsv,myRsv}

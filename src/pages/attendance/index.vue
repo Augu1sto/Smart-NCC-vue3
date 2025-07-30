@@ -93,7 +93,7 @@
 		Moon
 	} from '@icon-park/vue';
 	
-	const mTime = require('@/utils/mytime.js');
+	const mTime = require('@/utils/mytime');
 	
 	import { mapState } from 'vuex';
 	export default {

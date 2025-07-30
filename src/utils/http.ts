@@ -7,6 +7,7 @@ axios.defaults.timeout = 5000;
 
 // axios.defaults.baseURL = "http://192.168.43.14:8080"
 axios.defaults.baseURL = "http://localhost:8080"; // mockURL
+// axios.defaults.baseURL = "/api";
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // http 请求拦截器

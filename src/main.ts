@@ -5,8 +5,7 @@ import { createPinia } from "pinia";
 import axios from "@/utils/http";
 import { loginByToken } from "@/composables/useAuth";
 import uviewPlus, { setConfig } from 'uview-plus'
-
-
+import './mock/index.js';
 // 创建 Vue 应用实例
 const app = createApp(App);
 const pinia = createPinia();

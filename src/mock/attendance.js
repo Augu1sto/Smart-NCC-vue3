@@ -1,11 +1,10 @@
 /** 
  *	出勤信息 
 **/
-const Mock = require('better-mock')
+import Mock from 'better-mock';
 const Random = Mock.Random
 
-const time = require('@/utils/mytime.js');
-
+import myTime from '@/utils/mytime';
 // 构造出所有的数据
 function getDetail(date) {
 	return Mock.mock({
@@ -40,7 +39,7 @@ function getDetail(date) {
 
 const checkDataAll_origin = Mock.mock({"data|30":[{
     "id|+1":0, 
-    "date": function(){return time.calcDate(-1*this.id)},
+    "date": function(){return myTime.calcDate(-1*this.id)},
     "detail": function(){
 		return getDetail(this.date);
     }
@@ -61,7 +60,7 @@ checkDataAll_origin.forEach((item)=>{
 })
 
 // 获取今天的信息
-const checkToday = checkDataAll[time.toDayDate()]
+const checkToday = checkDataAll[myTime.toDayDate()]
 // console.log(JSON.stringify(checkDataAll));
 
-module.exports = {checkDataAll, validDays, checkToday};
+export default {checkDataAll, validDays, checkToday};

@@ -16,7 +16,13 @@
 	</view>
 </template>
 
-<script>
+<script setup lang="ts">
+import {useUserStore} from '@/store/user';
+
+
+
+</script>
+<!-- <script>
 	import { mapState, mapGetters } from 'vuex';
 	export default {
 		computed: {
@@ -54,7 +60,7 @@
 			}
 		}
 	}
-</script>
+</script> -->
 
 <style>
 

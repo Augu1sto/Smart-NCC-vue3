@@ -4,52 +4,50 @@ import { setToken, removeToken } from "@/utils/auth";
 
 interface TokenInfo {
     username?: string; // 可选属性
-    school?: string,
-    snumber?: string,
-    tel?: string,
-    avatar?: string,
+    school?: string;
+    snumber?: string;
+    tel?: string;
+    avatar?: string;
     // Add other properties as needed
 }
 
-export const useUserStore = defineStore('user', () => {
+export const useUserStore = defineStore("user", () => {
     // state
     const hasLogin = ref<boolean>(false);
-    const token = ref<string>('');
+    const token = ref<string>("");
     let tokenInfo = reactive<TokenInfo>({});
 
     // getters
-    const getUsername = computed<string>(() => tokenInfo.username || '');
-    const getSchool = computed<string>(() => tokenInfo.school || '');
-    const getNumber = computed<string>(() => tokenInfo.snumber || '');
-    const getTel = computed<string>(() => tokenInfo.tel || '');
-    const getAvatarUrl = computed<string>(() => tokenInfo.avatar || '');
+    const getUsername = computed<string>(() => tokenInfo.username || "");
+    const getSchool = computed<string>(() => tokenInfo.school || "");
+    const getNumber = computed<string>(() => tokenInfo.snumber || "");
+    const getTel = computed<string>(() => tokenInfo.tel || "");
+    const getAvatarUrl = computed<string>(() => tokenInfo.avatar || "");
 
     // actions
     function login(payload: any) {
         hasLogin.value = true;
-        tokenInfo = {
-            username: payload.username,
-            school: payload.school,
-            snumber: payload.snumber,
-            tel: payload.tel,
-            avatar: payload.avatar
-        };
+        // 更新 tokenInfo 的属性，而不是直接替换对象
+        tokenInfo.username = payload.username;
+        tokenInfo.school = payload.school;
+        tokenInfo.snumber = payload.snumber;
+        tokenInfo.tel = payload.tel;
+        tokenInfo.avatar = payload.avatar;
+        
         token.value = payload.token;
         setToken(payload, () => {
-            console.log('success login');
-        })
+            console.log("success login");
+        });
         // console.log(tokenInfo); // for dev
     }
-
 
     function logout() {
         hasLogin.value = false;
         token.value = "";
         tokenInfo = {};
 
-        removeToken();     
+        removeToken();
     }
-
 
     // actions
     function reLogin() {
@@ -67,6 +65,6 @@ export const useUserStore = defineStore('user', () => {
         getAvatarUrl,
         login,
         logout,
-        reLogin
+        reLogin,
     };
 });

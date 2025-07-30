@@ -214,18 +214,18 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/index/index",
-			"iconPath": "static/home.svg",
-			"selectedIconPath": "static/home_color.svg",
+			"iconPath": "/static/home.svg",
+			"selectedIconPath": "/static/home_color.svg",
 			"text": "首页"
 		},{
 			"pagePath": "pages/usercenter/index",
-			"iconPath": "static/user.svg",
-			"selectedIconPath": "static/user_color.svg",
+			"iconPath": "/static/user.svg",
+			"selectedIconPath": "/static/user_color.svg",
 			"text": "用户中心"
 		}],
 		"midButton": {
 			"height": "60px",
-			"iconPath": "static/add-one.svg",
+			"iconPath": "/static/add-one.svg",
 			"iconWidth": "50px"
 		}
 	},

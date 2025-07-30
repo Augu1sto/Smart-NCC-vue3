@@ -1,4 +1,5 @@
-const Mock = require('better-mock')
+import Mock from 'better-mock';
+
 const mockURL = 'http://localhost:8080'
 // const mockURL = 'http://192.168.43.14:8080'
 import urlParser from './utils/urlParser.js'
@@ -110,19 +111,28 @@ import loginMock from './userlogin.js'
 
 
 // 普通登录
-Mock.mock(RegExp(`${mockURL}/login` + ".*"), 'get', (options)=>{
-	console.log('mock', options.url);
-	let data = urlParser.parse2JSON(options.url);
-	return loginMock.login(data.username, data.password);
+Mock.mock(RegExp(`${mockURL}/login` + ".*"), 'get', (options) => {
+    return new Promise((resolve) => {
+        console.log('mock', options.url);
+        let data = urlParser.parse2JSON(options.url);
+        let result = loginMock.login(data.username, data.password);
+        resolve(result);
+    });
 });
 
 // token登录
-Mock.mock(`${mockURL}/tokenlogin`, 'get', (options)=>{
-	console.log('mock', options.headers);
-	if(options.headers.Authorization) {
-		return loginMock.loginWithToken(options.headers.Authorization);
-	}
-	return {code:900,msg:'ERROR'};
+Mock.mock(`${mockURL}/tokenlogin`, 'get', (options)=> {
+	return new Promise((resolve) => {
+		console.log('mock', options.headers);
+		if(options.headers.Authorization) {
+			let result=  loginMock.loginWithToken(options.headers.Authorization);
+			resolve(result);
+		} else {
+			let err =  {code:900,msg:'ERROR'};
+			resolve(err); // todo
+		}
+	});
+
 });
 
 

@@ -1,4 +1,4 @@
-const Mock = require('better-mock')
+import Mock from 'better-mock';
 const Random = Mock.Random
 /**
  * 所有数据
@@ -261,5 +261,4 @@ function unStarActivity(id) {
 }
 
 
-module.exports  = {selectData, getDetail, joinActivity, cancelJoin, starActivity, unStarActivity};
-
+export default { selectData, getDetail, joinActivity, cancelJoin, starActivity, unStarActivity };
