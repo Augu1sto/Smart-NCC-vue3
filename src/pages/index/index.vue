@@ -9,14 +9,17 @@
         </view>
         <view class="body">
             <tool-list></tool-list>
+            <notice-list lazyLoad></notice-list>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import { onShow } from "@dcloudio/uni-app";
-import ToolList from "./components/ToolList.vue";
 import { useUserStore } from "@/store/user";
+
+import ToolList from "./components/ToolList.vue";
+import NoticeList from "./components/NoticeList.vue";
 
 const userStore = useUserStore();
 onShow(() => {
