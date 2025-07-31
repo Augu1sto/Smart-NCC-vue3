@@ -1,15 +1,7 @@
 <template>
     <view class="picbox">
-        <u-swiper 
-            class="pickItem" 
-            :list="lazyPicList" 
-            keyName="displayImage" 
-            showTitle 
-            indicator 
-            indicatorMode="line"
-            circular 
-            @change="onSwiperChange" 
-            @click="clickPic">
+        <u-swiper class="pickItem" :list="lazyPicList" keyName="displayImage" showTitle indicator indicatorMode="line"
+            circular @change="onSwiperChange" @click="clickPic">
         </u-swiper>
     </view>
 </template>
@@ -134,5 +126,9 @@ function clickPic(index: number) {
     margin: 5rpx auto;
     border: 10rpx solid white;
     border-radius: 10rpx;
+}
+
+.pickItem:active {
+    filter: brightness(80%);
 }
 </style>

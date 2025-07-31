@@ -4,28 +4,19 @@
             <view class="title"> 智慧网安 </view>
 
             <view class="illustrator">
-                <image
-                    src="@/static/undraw_reading.svg"
-                    mode="aspectFill"
-                ></image>
+                <image src="@/static/undraw_reading.svg" mode="aspectFill"></image>
             </view>
-                        <view class="nav">
-                <view
-                    :class="[
-                        'nav_item',
-                        navidx === 0 ? 'nav_left nav_now' : 'nav_right',
-                    ]"
-                    @click="navidx = 0"
-                >
+            <view class="nav">
+                <view :class="[
+                    'nav_item',
+                    navidx === 0 ? 'nav_left nav_now' : 'nav_right',
+                ]" @click="navidx = 0">
                     登录
                 </view>
-                <view
-                    :class="[
-                        'nav_item',
-                        navidx === 1 ? 'nav_right nav_now' : 'nav_left',
-                    ]"
-                    @click="navidx = 1"
-                >
+                <view :class="[
+                    'nav_item',
+                    navidx === 1 ? 'nav_right nav_now' : 'nav_left',
+                ]" @click="navidx = 1">
                     注册
                 </view>
             </view>
@@ -33,37 +24,24 @@
         <view :class="['body', navidx === 0 ? 'bg-left' : 'bg-right']">
             <view class="form_box login" v-if="navidx === 0">
                 <u--form :model="formRef">
-                    <focus-input
-                        v-model="formRef.userInfo.uname"
-                        prop="userInfo.uname"
-                        type="text"
-                    >用户名</focus-input>
-                    <focus-input
-                        v-model="formRef.userInfo.password"
-                        prop="userInfo.password"
-                        type="password"
-                    >密码</focus-input>
+                    <focus-input v-model="formRef.userInfo.uname" prop="userInfo.uname" type="text">用户名</focus-input>
+                    <focus-input v-model="formRef.userInfo.password" prop="userInfo.password"
+                        type="password">密码</focus-input>
                     <view class="tip1">忘记密码？</view>
                 </u--form>
 
                 <view class="btn">
-                    <u-button
-                        color="#00adb5"
-                        shape="circle"
-                        :hairline="false"
-                        @click="submit"
-                        ><strong>登&nbsp;录</strong></u-button
-                    >
+                    <u-button color="#00adb5" shape="circle" :hairline="false"
+                        @click="submit"><strong>登&nbsp;录</strong></u-button>
                 </view>
                 <view class="visitor-entrance" @click="visitLogin">
-                    >游客登入<
+                    >游客登入< </view>
+                </view>
+                <view class="form_box signup" v-else>
+                    <u-empty mode="permission" text="功能暂未开放"> </u-empty>
                 </view>
             </view>
-            <view class="form_box signup" v-else>
-                <u-empty mode="permission" text="功能暂未开放"> </u-empty>
-            </view>
         </view>
-    </view>
 </template>
 
 <script setup lang="ts">
@@ -71,12 +49,34 @@ import { ref, reactive, inject } from "vue";
 import { useUserStore } from "@/store/user";
 import { test, toast } from "uview-plus";
 import type { AxiosInstance } from "axios";
+import { onLoad } from "@dcloudio/uni-app";
+
+const $onLaunched = inject<Promise<void>>("$onLaunched");
+
+const userStore = useUserStore();
+const $axios = inject("$axios") as AxiosInstance; // 注入全局 axios 实例
+
+
+onLoad(async () => {
+    console.log("[Login] 页面 onLoad 开始初始化");
+
+    try {
+        // 等待 main.ts 中 loginByToken 完成（不管是否登录）
+        await $onLaunched;
+        console.log("[Login] 初始化完成，判断跳转");
+        if (userStore.hasLogin) {
+            console.log("[Login] 已登录，跳转首页");
+            uni.switchTab({ url: "/pages/index/index" });
+        }
+    } catch (e) {
+        console.error("[Login] 初始化失败", e);
+    }
+});
+
 
 // 导入页面组件
 import FocusInput from "./components/FocusInput.vue";
 
-const userStore = useUserStore();
-const $axios = inject("$axios") as AxiosInstance; // 注入全局 axios 实例
 
 let navidx = ref(0); // 导航索引，0为登录，1为注册
 // let isFocus0 = ref(false); // 用户名输入框焦点状态
@@ -170,6 +170,7 @@ function visitLogin(): void {
 * {
     box-sizing: border-box;
 }
+
 page {
     background-color: #00adb5;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='135' height='135' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%2300939b' fill-opacity='0.6'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
@@ -185,6 +186,7 @@ page {
     height: 135px;
     position: relative;
 }
+
 .title {
     font-family: ZoomlaTouyinghei-A032;
     font-weight: 100;
@@ -214,10 +216,12 @@ page {
     align-items: center;
     color: white;
     font-weight: bold;
+
     &_item {
         padding: 5px;
         color: rgba(255, 255, 255, 0.5);
     }
+
     &_item::after {
         content: "";
         width: 40px;
@@ -226,14 +230,17 @@ page {
         position: absolute;
         bottom: 0px;
     }
+
     &_left::after {
         left: 12px;
         transition: left 0.1s ease;
     }
+
     &_right::after {
         left: 78px;
         transition: left 0.1s ease;
     }
+
     &_now {
         color: white;
     }
@@ -245,7 +252,8 @@ page {
     top: 80px;
     z-index: 100;
 }
-.illustrator > image {
+
+.illustrator>image {
     width: 120px;
     height: 120px;
 }
@@ -287,6 +295,7 @@ page {
         font-size: 14px;
         color: $highlight-color;
     }
+
     .visitor-entrance {
         text-align: center;
         text-decoration: underline;

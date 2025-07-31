@@ -5,10 +5,6 @@ import path from "path";
 
 export default defineConfig({
     plugins: [
-        // nodePolyfills({
-        //     // 启用 polyfill 的模块
-        //     protocolImports: true,
-        // }),
         uni(),
     ],
     css: {

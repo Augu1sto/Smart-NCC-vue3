@@ -1,15 +1,12 @@
 <template>
     <view class="main">
         <view class="header">
-            <image
-                src="@/static/banner.png"
-                mode="widthFix"
-                class="banner"
-            ></image>
+            <image src="@/static/banner.png" mode="widthFix" class="banner"></image>
         </view>
         <view class="body">
             <tool-list></tool-list>
             <notice-list lazyLoad></notice-list>
+            <ex-list></ex-list>
         </view>
     </view>
 </template>
@@ -20,6 +17,8 @@ import { useUserStore } from "@/store/user";
 
 import ToolList from "./components/ToolList.vue";
 import NoticeList from "./components/NoticeList.vue";
+import ExList from "./components/ExList.vue";
+
 
 const userStore = useUserStore();
 onShow(() => {
