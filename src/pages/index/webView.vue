@@ -15,7 +15,7 @@ const title = ref('外部链接');
 const url = ref('');
 
 onLoad((res) => {
-    const params = res;
+    const params = res || {url: '', title: ''};
     url.value = params.url;
     title.value = params.title;
 });
