@@ -1,7 +1,7 @@
 <template>
     <view class="main">
         <view class="header">
-            <image src="@/static/banner.png" mode="widthFix" class="banner"></image>
+            <image src="/static/banner.png" mode="widthFix" class="banner"></image>
         </view>
         <view class="body">
             <tool-list></tool-list>

@@ -33,6 +33,52 @@ const launched = new Promise<void>(async (resolve, reject) => {
 app.provide("$onLaunched", launched);
 app.provide("$axios", axios);
 
+import { useUserStore } from "@/store/user";
+
+const userStore = useUserStore();
+
+
+const whiteList = ['/pages/login/login', '/pages/index/index', '/pages/loading','/'];
+const list = ["navigateTo", "redirectTo", "switchTab"];
+
+function hasPermission(url: string) {
+	// 在白名单中或有token，直接跳转
+	if (whiteList.indexOf(url) !== -1 || userStore.hasLogin ) {
+		return true;
+	}
+	return false;
+}
+
+list.forEach((item) => {
+	uni.addInterceptor(item, {
+		// 页面跳转前进行拦截, invoke根据返回值进行判断是否继续执行跳转
+
+		invoke(e) {
+			if (!hasPermission(e.url)) {
+				
+				// 将用户的目标路径保存下来
+        // 这样可以实现 用户登录之后，直接跳转到目标页面
+				// uni.setStorageSync("URL", e.url)
+
+				uni.reLaunch({
+					url: "/pages/login/login",
+				});
+				
+				return false;
+			}
+			return true;
+		}
+	});
+});
+
+(function checkURL() {
+  let path = location.pathname; // 例如 /pages/user/profile
+  if (!whiteList.includes(path) && !userStore.hasLogin) {
+    // 直接替换地址，禁止回退到非法页面
+    location.replace('/pages/login/login');
+  }
+})();
+
 // 挂载应用
 app.mount("#app");
 

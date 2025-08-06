@@ -64,8 +64,8 @@
     "h5" : {
         "title" : "智慧网安",
         "router" : {
-            "mode" : "hash",
-            "base" : "./"
+            "mode" : "history",
+            "base" : "/"
         },
         "optimization" : {
             "treeShaking" : {

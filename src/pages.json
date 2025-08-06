@@ -8,16 +8,7 @@
 		}
 	},
 	"pages": [
-        {
-		    "path" : "pages/loading",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "transparent"
-		    }
-		    
-		},
+
 		{
 		    "path" : "pages/login/login",
 		    "style" :                                                                                    

@@ -4,6 +4,7 @@ import uni from "@dcloudio/vite-plugin-uni";
 import path from "path";
 
 export default defineConfig({
+    base: '/',
     plugins: [
         uni(),
     ],
@@ -19,6 +20,7 @@ export default defineConfig({
             "@": path.resolve(path.dirname(import.meta.url), "src"),
         },
     },
+
     // server: {
     //     proxy: {
     //         "/api": {

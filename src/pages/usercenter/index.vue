@@ -30,16 +30,16 @@ import { onShow } from "@dcloudio/uni-app";
 import { ref } from "vue";
 const userStore = useUserStore();
 
-onShow(() => {
-    if (!userStore.hasLogin) {
-        uni.setNavigationBarTitle({
-            title: "正在跳转",
-        });
-        uni.reLaunch({
-            url: '/pages/login/login'
-        });
-    }
-});
+// onShow(() => {
+//     if (!userStore.hasLogin) {
+//         uni.setNavigationBarTitle({
+//             title: "正在跳转",
+//         });
+//         uni.reLaunch({
+//             url: '/pages/login/login'
+//         });
+//     }
+// });
 
 const { username: myname } = userStore.tokenInfo;
 console.log('[usercenter]' + myname);
