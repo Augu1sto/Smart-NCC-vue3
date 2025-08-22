@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, defineProps, defineEmits } from "vue";
+import { ref, watch } from "vue";
 
 // 定义prop，接受父组件传来的数据
 const props = defineProps<{
